@@ -1,0 +1,35 @@
+.container {
+  border: 1px solid var(--topbar-border-helper);
+  padding-block: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btn {
+  border: none;
+  padding: 0;
+}
+
+.selectBoardBtn {
+  background-color: var(--foreground-clr);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.currentBoardTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.downTick {
+  position: relative;
+  top: 0.2rem;
+}
+
+.groupPlusKebab {
+  display: flex;
+  gap: 1.6rem;
+}
