@@ -1,0 +1,6 @@
+.container {
+  border: 1px solid var(--app-title-border-helper);
+  display: flex;
+  gap: 1rem;
+  padding-block: 2rem;
+}
