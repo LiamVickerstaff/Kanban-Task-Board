@@ -1,0 +1,66 @@
+.container {
+  background-color: var(--foreground-clr);
+  width: 26.4rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  padding-block: 1.6rem;
+  position: absolute;
+  bottom: -3.6rem;
+  left: 2rem;
+}
+
+.container h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  color: var(--soft-text-clr);
+  padding-inline-start: 2.4rem;
+  padding-block-end: 1.8rem;
+}
+
+.boardsList {
+  list-style: none;
+  padding: 0;
+  padding-inline-end: 2.4rem;
+}
+
+.boardItem {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  padding-block: 1.6rem;
+  padding-inline-start: 3.2rem;
+  border: none;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+
+  text-align: start;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.inactive {
+  background-color: var(--foreground-clr);
+  color: var(--soft-text-clr);
+}
+
+.inactive:hover {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+}
+
+.active {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.newBoardItem .btn {
+  background-color: var(--foreground-clr);
+  color: var(--primary-clr);
+}
+
+.newBoardItem .btn:hover {
+  color: var(--main-purple-hover);
+}

@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid var(--dashboard-border-helper);
+  /* border: 1px solid var(--dashboard-border-helper); */
   background-color: var(--background-clr);
   width: 100%;
   height: 100%;
@@ -25,6 +25,8 @@
 }
 
 .populatedContainer {
+  /* border: 1px solid red; */
+  width: fit-content;
   display: flex;
   padding-block-start: 2.4rem;
   gap: 2.4rem;
