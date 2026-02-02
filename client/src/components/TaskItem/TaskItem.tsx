@@ -1,10 +1,16 @@
+import useModalStore from "../../stores/useModalStore";
 import type { TaskType } from "../../types/taskTypes";
+import TaskItemInfo from "../TaskItemInfo/TaskItemInfo";
 import styles from "./TaskItem.module.css";
 
+export default function TaskItem({ task }: { task: TaskType }) {
+  const open = useModalStore((s) => s.open);
 
-export default function TaskItem({task}: {task: TaskType}) {
   return (
-    <button className={styles.container}>
+    <button
+      className={styles.container}
+      onClick={() => open(<TaskItemInfo task={task} />)}
+    >
       <h3>{task.title}</h3>
       <span>0 of {task.subtasks.length} subtasks</span>
     </button>

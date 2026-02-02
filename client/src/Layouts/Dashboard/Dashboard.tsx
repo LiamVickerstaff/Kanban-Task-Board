@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styles from "./Dashboard.module.css";
-import PrimaryBtn from "../../components/atoms/PrimaryBtn/PrimaryBtn";
 import sampleTaskData from "../../sampleTaskData";
 import TaskColumn from "../../components/TaskColumn/TaskColumn";
 import type { ColumnType } from "../../types/taskTypes";
+import Button from "../../components/atoms/Buttons/Button/Button";
+import BoardForm from "../../components/forms/BoardForm/BoardForm";
+import useModalStore from "../../stores/useModalStore";
 
 export default function Dashboard() {
+  const open = useModalStore((s) => s.open);
   const [columnsData, setColumnsdata] = useState(sampleTaskData);
 
   return (
@@ -15,9 +18,15 @@ export default function Dashboard() {
           <p className={styles.emptyColumnsMessage}>
             This board is empty. Create a new column to get started.
           </p>
-          <PrimaryBtn padInline={12} fontSize={1.5} padBlock={12}>
+          <Button
+            padInline={1.2}
+            fontSize={1.5}
+            padBlock={1.2}
+            style="primary"
+            callback={() => open(<BoardForm type="Edit" />)}
+          >
             + Add New Column
-          </PrimaryBtn>
+          </Button>
         </div>
       ) : (
         <div className={styles.populatedContainer}>

@@ -1,0 +1,54 @@
+.formContainer {
+  /* border: 1px solid red; */
+  padding: 2.4rem;
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 2.4rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.formContainer::-webkit-scrollbar {
+  display: none; /* Older Safari and Chromium */
+}
+
+.formContainer h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.formFieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.formFieldLabel {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--soft-text-clr);
+  letter-spacing: 0.4px;
+}
+
+.formFieldInput {
+  width: 100%;
+  padding-block: 0.8rem;
+  padding-inline: 0.8rem;
+
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 0.4rem;
+  outline: none;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.formFieldInput:focus {
+  border: 1px solid var(--main-purple-hover);
+}
+
+.formFieldInput::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}

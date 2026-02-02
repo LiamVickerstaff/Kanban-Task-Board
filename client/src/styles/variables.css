@@ -1,5 +1,5 @@
 :root {
-  /* Primary Color tokens */
+  /*  ---  Primary Color tokens  ---  */
   --main-purple: hsl(242, 48%, 58%);
   --main-purple-hover: hsl(243, 100%, 82%);
   --soft-purple: hsla(242, 48%, 58%, 0.1);
@@ -15,16 +15,32 @@
   --red: hsl(0, 78%, 63%);
   --red-hover: hsl(0, 100%, 80%);
 
-  /* Semantic Color Tokens */
+  /*  ---  Semantic Color Tokens  ---  */
+  --primary-clr: var(--main-purple);
+  --primary-clr-hover: var(--main-purple-hover);
+
   --background-clr: var(--light-grey);
   --foreground-clr: var(--white);
   --strong-text-clr: var(--black);
   --soft-text-clr: var(--medium-grey);
 
+  /* Buttons */
   --btn-primary-bg: var(--main-purple);
   --btn-primary-text: var(--white);
   --btn-primary-bg-hover: var(--main-purple-hover);
-  --btn-secondary-bg: var(--purple-grey);
+  --btn-secondary-bg: var(--soft-purple);
+  --btn-secondary-text: var(--main-purple);
+  --btn-secondary-bg-hover: var(--soft-purple-hover);
+  --btn-danger-bg: var(--red);
+  --btn-danger-text: var(--white);
+  --btn-danger-bg-hover: var(--red-hover);
+
+  --form-field-border-clr: var(--medium-grey);
+
+  --text-danger: var(--red);
+
+  --subtask-bg: var(--light-grey);
+  --subtask-bg-hover: var(--soft-purple-hover);
 
   /* Helper variables */
   --topbar-border-helper: #ff01c0;
@@ -37,4 +53,6 @@
   --background-clr: var(--very-dark-grey);
   --foreground-clr: var(--dark-grey);
   --strong-text-clr: var(--white);
+
+  --btn-secondary-bg: var(--white);
 }

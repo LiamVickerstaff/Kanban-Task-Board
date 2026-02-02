@@ -10,4 +10,7 @@
   padding-inline: 1.6rem;
   gap: 1.6rem;
   max-height: 6.4rem;
+  position: relative;
+  z-index: 100;
+  background-color: var(--foreground-clr);
 }

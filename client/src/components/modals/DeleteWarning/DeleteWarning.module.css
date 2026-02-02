@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem;
+}
+
+.container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-danger);
+}
+
+.container p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2;
+  color: var(--soft-text-clr);
+}
+
+.btnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+

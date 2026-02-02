@@ -6,8 +6,11 @@ export type SubtaskType = {
 export type TaskType = {
   id: string;
   title: string;
+  description: string;
   subtasks: SubtaskType[];
+  status: string;
 };
+
 
 export type ColumnType = {
   title: string;

@@ -1,0 +1,47 @@
+/* All Buttons */
+.primary,
+.secondary,
+.danger {
+  border-radius: 2.4rem;
+  border: none;
+}
+
+.primary span,
+.secondary span,
+.danger span {
+  position: relative;
+  font-weight: 700;
+}
+
+/* Primary Button */
+.primary {
+  background-color: var(--btn-primary-bg);
+}
+.primary span {
+  color: var(--btn-primary-text);
+}
+.primary:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
+/* Secondary Button */
+.secondary {
+  background-color: var(--btn-secondary-bg);
+}
+.secondary span {
+  color: var(--btn-secondary-text);
+}
+.secondary:hover {
+  background-color: var(--btn-secondary-bg-hover);
+}
+
+/* Danger Button */
+.danger {
+  background-color: var(--btn-danger-bg);
+}
+.danger span {
+  color: var(--btn-danger-text);
+}
+.danger:hover {
+  background-color: var(--btn-danger-bg-hover);
+}
