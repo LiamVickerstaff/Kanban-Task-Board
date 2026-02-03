@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 90%;
+  height: 4.8rem;
+  padding-inline-start: 2.4rem;
+  margin-block-start: 1.6rem;
+  border: none;
+  outline: none;
+  background-color: var(--foreground-clr);
+}
+
+.container p {
+  color: var(--soft-text-clr);
+  position: relative;
+  bottom: 0.1rem;
+}

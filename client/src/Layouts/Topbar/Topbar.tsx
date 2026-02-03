@@ -10,7 +10,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 export default function Topbar() {
   const open = useModalStore((s) => s.open);
   const { currentBoard, toggleSidebar } = useSidebarStore();
-  const isMobile = useMediaQuery("(min-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const handleClick = () => {
     toggleSidebar();
@@ -25,7 +25,7 @@ export default function Topbar() {
         <h2 className={`headingXL ${styles.currentBoardTitle}`}>
           {currentBoard}
         </h2>
-        <DownTick className={styles.downTick} />
+        {isMobile && <DownTick className={styles.downTick} />}
       </button>
       <div className={styles.groupPlusKebab}>
         <Button

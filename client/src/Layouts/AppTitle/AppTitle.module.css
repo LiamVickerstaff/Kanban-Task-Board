@@ -13,15 +13,26 @@
 
 @media (min-width: 768px) {
   .container {
-    width: fit-content;
     border-right: 1px solid var(--border-lines);
     padding-inline: 2.4rem;
+  }
+
+  .copySidebarWidth {
+    width: 26rem;
+  }
+
+  .regularWidth {
+    width: fit-content;
   }
 }
 
 @media (min-width: 1240px) {
   .container {
-    width: 30rem;
     padding-inline-start: 3.4rem;
+  }
+
+  .regularWidth,
+  .copySidebarWidth {
+    width: 30rem;
   }
 }

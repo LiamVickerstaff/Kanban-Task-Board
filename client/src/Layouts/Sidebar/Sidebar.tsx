@@ -4,10 +4,14 @@ import useSidebarStore from "../../stores/useSidebarStore";
 import BoardIcon from "../../components/icons/BoardIcon";
 import BoardForm from "../../components/forms/BoardForm/BoardForm";
 import useModalStore from "../../stores/useModalStore";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import HideSidebarButton from "../../components/HideSidebarButton/HideSidebarButton";
 
 export default function Sidebar() {
   const { isOpen, currentBoard, toggleSidebar, setCurrentBoard } =
     useSidebarStore();
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const open = useModalStore((s) => s.open);
 
@@ -52,7 +56,10 @@ export default function Sidebar() {
             </button>
           </li>
         </ul>
-        <LightDarkSwitch />
+        <div className={styles.bottomGroup}>
+          <LightDarkSwitch />
+          {!isMobile && <HideSidebarButton />}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,15 @@
+.container {
+  position: absolute;
+  bottom: 3.2rem;
+  border: 0;
+  outline: 0;
+  background-color: var(--btn-primary-bg);
+  padding: 1.8rem;
+  padding-inline-end: 2rem;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+}
+
+.container:hover {
+  background-color: var(--btn-primary-bg-hover);
+}

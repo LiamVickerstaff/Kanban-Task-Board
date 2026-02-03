@@ -2,10 +2,11 @@ import styles from "./App.module.css";
 import RootModal from "./components/modals/RootModal/RootModal";
 import AppTitle from "./Layouts/AppTitle/AppTitle";
 import Dashboard from "./Layouts/Dashboard/Dashboard";
-import Sidebar from "./Layouts/Sidebar/Sidebar";
 import Topbar from "./Layouts/Topbar/Topbar";
 import "./styles/variables.css";
 import useSidebarStore from "./stores/useSidebarStore";
+import OpenSidebarButton from "./components/OpenSidebarButton/OpenSidebarButton";
+import Sidebar from "./Layouts/Sidebar/Sidebar";
 
 function App() {
   const sidebarIsOpen = useSidebarStore((s) => s.isOpen);
@@ -17,8 +18,10 @@ function App() {
         <AppTitle />
         <Topbar />
       </div>
-      {sidebarIsOpen && <Sidebar />}
-      <Dashboard />
+      <div className={styles.bottomGroup}>
+        {sidebarIsOpen ? <Sidebar /> : <OpenSidebarButton />}
+        <Dashboard />
+      </div>
     </div>
   );
 }
