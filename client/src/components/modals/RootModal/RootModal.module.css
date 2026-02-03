@@ -13,7 +13,7 @@
 .modalContainer {
   background-color: var(--foreground-clr);
   margin-inline: 2rem;
-  min-width: 300px;
+  min-width: 30rem;
   max-height: 90vh;
   position: fixed;
   border-radius: 0.6rem;
@@ -23,6 +23,7 @@
   max-height: 90vh;
   height: fit-content;
   overflow-y: auto;
+  width: 100%;
 
   -ms-overflow-style: none;
   scrollbar-width: none;

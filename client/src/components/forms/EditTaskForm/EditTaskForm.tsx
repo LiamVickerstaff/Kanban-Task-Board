@@ -25,7 +25,7 @@ export default function EditTaskForm({ task }: { task: TaskType }) {
   return (
     <FormProvider {...methods}>
       <form
-        className={styles.formContainer}
+        className={`formContainer`}
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <h2>Edit Task</h2>

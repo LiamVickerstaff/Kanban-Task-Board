@@ -24,6 +24,8 @@
   --strong-text-clr: var(--black);
   --soft-text-clr: var(--medium-grey);
 
+  --dropdown-bg: var(--white);
+
   /* Buttons */
   --btn-primary-bg: var(--main-purple);
   --btn-primary-text: var(--white);
@@ -35,17 +37,20 @@
   --btn-danger-text: var(--white);
   --btn-danger-bg-hover: var(--red-hover);
 
+  /* Forms */
+
   --form-field-border-clr: var(--medium-grey);
-
-  --text-danger: var(--red);
-
+  --form-label-text-clr: var(--medium-grey);
   --subtask-bg: var(--light-grey);
   --subtask-bg-hover: var(--soft-purple-hover);
+  --status-option-bg-hover: var(--soft-purple);
+  --status-option-text-hover: var(--main-purple);
 
   /* Helper variables */
   --topbar-border-helper: #ff01c0;
   --app-title-border-helper: #e1ff01;
   --dashboard-border-helper: #29ff0c;
+  --text-danger: var(--red);
 }
 
 /* Dark Theme */
@@ -54,5 +59,12 @@
   --foreground-clr: var(--dark-grey);
   --strong-text-clr: var(--white);
 
+  --dropdown-bg: var(--very-dark-grey);
+
   --btn-secondary-bg: var(--white);
+  --btn-secondary-bg-hover: var(--white);
+
+  --form-label-text-clr: var(--white);
+  --status-option-bg-hover: var(--dark-grey);
+  --status-option-text-hover: var(--main-purple);
 }

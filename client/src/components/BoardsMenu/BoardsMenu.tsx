@@ -1,8 +1,12 @@
 import { useState } from "react";
 import styles from "./BoardsMenu.module.css";
 import LightDarkSwitch from "../LightDarkSwitch/LightDarkSwitch";
+import useModalStore from "../../stores/useModalStore";
+import BoardForm from "../forms/BoardForm/BoardForm";
 
 export default function BoardsMenu() {
+  const open = useModalStore((s) => s.open);
+
   const sampleBoardData = [
     { title: "Platform Launch" },
     { title: "Marketing Plan" },
@@ -27,7 +31,12 @@ export default function BoardsMenu() {
           </li>
         ))}
         <li className={styles.newBoardItem}>
-          <button className={`${styles.btn}`}>+ Create New Board</button>
+          <button
+            className={`${styles.btn}`}
+            onClick={() => console.log("Try to open")}
+          >
+            + Create New Board ue
+          </button>
         </li>
       </ul>
       <LightDarkSwitch />

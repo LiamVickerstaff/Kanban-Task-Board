@@ -7,6 +7,7 @@
 
 .container label {
   padding-block-end: 0.8rem;
+  color: var(--strong-text-clr);
 }
 
 .openOptionsBtn {
@@ -16,6 +17,10 @@
   padding-inline-end: 1.6rem;
   background-color: var(--foreground-clr);
   position: relative;
+}
+
+.currentStatus {
+  color: var(--strong-text-clr);
 }
 
 .downTick {
@@ -30,7 +35,7 @@
   padding: 0;
   list-style: none;
   border-radius: 0.8rem;
-  background-color: var(--foreground-clr);
+  background-color: var(--dropdown-bg);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   -ms-overflow-style: none;
@@ -55,7 +60,7 @@
 }
 
 .optionBtn:hover {
-  color: var(--btn-secondary-text);
-  background-color: var(--btn-secondary-bg);
+  color: var(--status-option-text-hover);
+  background-color: var(--status-option-bg-hover);
   font-weight: 700;
 }

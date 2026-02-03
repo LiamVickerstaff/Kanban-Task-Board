@@ -42,7 +42,7 @@ export default function StatusDropdownField({
         className={`${styles.openOptionsBtn} formFieldInput`}
         onClick={toggleDropdown}
       >
-        <span>{currentStatus}</span>
+        <span className={styles.currentStatus}>{currentStatus}</span>
         <span>
           <DownTick className={styles.downTick} />
         </span>
