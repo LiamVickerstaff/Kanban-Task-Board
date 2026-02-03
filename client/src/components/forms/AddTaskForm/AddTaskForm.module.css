@@ -1,5 +1,4 @@
 .formContainer {
-  /* border: 1px solid red; */
   padding: 2.4rem;
   display: flex;
   flex-direction: column;
@@ -9,7 +8,7 @@
 }
 
 .formContainer::-webkit-scrollbar {
-  display: none; /* Older Safari and Chromium */
+  display: none;
 }
 
 .formContainer h2 {

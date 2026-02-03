@@ -6,6 +6,7 @@ import AddTaskForm from "../../components/forms/AddTaskForm/AddTaskForm";
 import KebabButton from "../../components/atoms/Buttons/KebabButton/KebabButton";
 import useSidebarStore from "../../stores/useSidebarStore";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import PlusIcon from "../../components/icons/PlusIcon";
 
 export default function Topbar() {
   const open = useModalStore((s) => s.open);
@@ -28,16 +29,12 @@ export default function Topbar() {
         {isMobile && <DownTick className={styles.downTick} />}
       </button>
       <div className={styles.groupPlusKebab}>
-        <Button
-          top={-0.2}
-          padInline={1.2}
-          padBlock={isMobile ? 1.4 : 0.8}
-          style="primary"
-          size="large"
-          callback={() => open(<AddTaskForm />)}
+        <button
+          className={`${styles.addNewTaskBtn} headingM`}
+          onClick={() => open(<AddTaskForm />)}
         >
-          + {isMobile && "Add New Task"}
-        </Button>
+          {isMobile ? <PlusIcon /> : "+ Add New Task"}
+        </button>
         <KebabButton type="Board" />
       </div>
     </div>

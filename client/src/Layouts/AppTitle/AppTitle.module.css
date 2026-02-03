@@ -1,5 +1,4 @@
 .container {
-  border: 1px solid var(--app-title-border-helper);
   display: flex;
   align-items: center;
   padding-inline-start: 1.6rem;
@@ -17,12 +16,13 @@
     padding-inline: 2.4rem;
   }
 
-  .copySidebarWidth {
+  .sidebarOpen {
     width: 26rem;
   }
 
-  .regularWidth {
+  .sidebarClosed {
     width: fit-content;
+    border-bottom: 1px solid var(--border-lines);
   }
 }
 
@@ -31,8 +31,8 @@
     padding-inline-start: 3.4rem;
   }
 
-  .regularWidth,
-  .copySidebarWidth {
+  .sidebarOpen,
+  .sidebarClosed {
     width: 30rem;
   }
 }

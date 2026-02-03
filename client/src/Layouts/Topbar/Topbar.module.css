@@ -1,5 +1,4 @@
 .container {
-  border: 1px solid var(--topbar-border-helper);
   flex: 1;
   padding-block: 1.6rem;
   padding-inline-end: 1.6rem;
@@ -9,7 +8,8 @@
   width: 100%;
 }
 
-.btn {
+.btn,
+.addNewTaskBtn {
   border: none;
   padding: 0;
 }
@@ -35,9 +35,22 @@
   gap: 1.6rem;
 }
 
+.addNewTaskBtn {
+  background-color: var(--btn-primary-bg);
+  padding-block: 1rem;
+  padding-inline: 1.8rem;
+  border-radius: 2.4rem;
+  color: var(--btn-primary-text);
+}
+
+.addNewTaskBtn:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
 @media (min-width: 768px) {
   .container {
     padding-inline: 2.4rem;
+    border-bottom: 1px solid var(--border-lines);
   }
 }
 

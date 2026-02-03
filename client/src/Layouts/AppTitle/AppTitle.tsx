@@ -10,7 +10,7 @@ export default function AppTitle() {
 
   return (
     <div
-      className={`${styles.container} ${isOpen ? styles.copySidebarWidth : styles.regularWidth}`}
+      className={`${styles.container} ${isOpen ? styles.sidebarOpen : styles.sidebarClosed}`}
     >
       <KanbanLogo />
       {!isMobile && <KanbanTitle className={styles.kanbanTitle} />}
