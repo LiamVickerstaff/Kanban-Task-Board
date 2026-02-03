@@ -37,7 +37,7 @@ export default function EditTaskForm({ task }: { task: TaskType }) {
           label="Status"
           options={["Todo", "Doing", "Completed"]}
         />
-        <Button fontSize={1.3} fullWidth={true} padBlock={0.8} style="primary">
+        <Button fullWidth={true} padBlock={0.8} style="primary">
           Create Task
         </Button>
       </form>

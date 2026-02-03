@@ -1,6 +1,8 @@
 .container {
-  /* border: 1px solid var(--topbar-border-helper); */
-  padding-block: 2rem;
+  border: 1px solid var(--topbar-border-helper);
+  flex: 1;
+  padding-block: 1.6rem;
+  padding-inline-end: 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,8 +22,6 @@
 }
 
 .currentBoardTitle {
-  font-size: 1.8rem;
-  font-weight: 700;
   color: var(--strong-text-clr);
 }
 
@@ -33,4 +33,16 @@
 .groupPlusKebab {
   display: flex;
   gap: 1.6rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2.4rem;
+  }
+}
+
+@media (min-width: 1240px) {
+  .container {
+    padding-inline-end: 3.2rem;
+  }
 }

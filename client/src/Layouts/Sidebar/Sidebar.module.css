@@ -21,8 +21,6 @@
 }
 
 .container h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
   letter-spacing: 0.2rem;
   color: var(--soft-text-clr);
   padding-inline-start: 2.4rem;
@@ -48,8 +46,6 @@
   border-bottom-right-radius: 3rem;
 
   text-align: start;
-  font-size: 1.5rem;
-  font-weight: 700;
 
   display: flex;
   align-items: center;
@@ -90,4 +86,7 @@
 
 .newBoardItem .btn:hover {
   color: var(--main-purple-hover);
+}
+
+@media (min-width: 768px) {
 }

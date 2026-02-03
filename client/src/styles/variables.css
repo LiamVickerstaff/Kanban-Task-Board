@@ -26,6 +26,8 @@
 
   --dropdown-bg: var(--white);
 
+  --border-lines: var(--lines-light);
+
   /* Buttons */
   --btn-primary-bg: var(--main-purple);
   --btn-primary-text: var(--white);
@@ -60,6 +62,7 @@
   --strong-text-clr: var(--white);
 
   --dropdown-bg: var(--very-dark-grey);
+  --border-lines: var(--lines-dark);
 
   --btn-secondary-bg: var(--white);
   --btn-secondary-bg-hover: var(--white);

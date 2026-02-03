@@ -25,16 +25,10 @@ export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
   return (
     <FormProvider {...methods}>
       <form className="formContainer" onSubmit={methods.handleSubmit(onSubmit)}>
-        <h2>{type} Board</h2>
+        <h2 className="headingL">{type} Board</h2>
         <TextField name="title" label="Board Name" />
         <ColumnsTagsField />
-        <Button
-          type="submit"
-          fontSize={1.3}
-          fullWidth={true}
-          padBlock={0.8}
-          style="primary"
-        >
+        <Button type="submit" fullWidth={true} padBlock={0.8} style="primary">
           Create Task
         </Button>
       </form>

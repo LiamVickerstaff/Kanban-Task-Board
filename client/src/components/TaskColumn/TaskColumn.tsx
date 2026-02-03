@@ -7,7 +7,7 @@ export default function TaskColumn({ column }: { column: ColumnType }) {
     <div className={styles.container}>
       <div className={styles.columnTitle}>
         <div style={{ backgroundColor: "blue" }}></div>
-        <h3>
+        <h3 className="headingS">
           {column.title} ({column.tasks.length})
         </h3>
       </div>

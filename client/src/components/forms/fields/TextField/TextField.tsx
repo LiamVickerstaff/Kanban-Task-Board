@@ -15,11 +15,11 @@ export default function TextField({
 
   return (
     <div className={`formFieldContainer`}>
-      <label className={`formFieldLabel`} htmlFor={name}>
+      <label className={`headingS formFieldLabel`} htmlFor={name}>
         {label}
       </label>
       <input
-        className={`formFieldInput`}
+        className={`bodyL formFieldInput`}
         type="text"
         placeholder={placeholderText.title || ""}
         id={name}

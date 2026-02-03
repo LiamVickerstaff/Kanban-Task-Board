@@ -1,5 +1,4 @@
 .container {
-  /* border: 1px solid red; */
   min-width: 28rem;
   height: 100%;
 }
@@ -18,8 +17,6 @@
 }
 
 .columnTitle h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
   letter-spacing: 2.4px;
   text-transform: uppercase;
   color: var(--soft-text-clr);

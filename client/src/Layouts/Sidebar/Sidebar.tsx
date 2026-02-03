@@ -28,12 +28,12 @@ export default function Sidebar() {
       onClick={() => isOpen && toggleSidebar()}
     >
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <h3>ALL BOARDS ({sampleBoardData.length})</h3>
+        <h3 className="headingS">ALL BOARDS ({sampleBoardData.length})</h3>
         <ul className={styles.boardsList}>
           {sampleBoardData.map((board, index) => (
             <li key={index} className={`${styles.boardItem}`}>
               <button
-                className={`${styles.btn} 
+                className={`${styles.btn} headingM
                 ${currentBoard === board.title ? styles.active : styles.inactive}
                 `}
                 onClick={() => setCurrentBoard(board.title)}
@@ -45,7 +45,7 @@ export default function Sidebar() {
           ))}
           <li className={styles.newBoardItem}>
             <button
-              className={`${styles.btn}`}
+              className={`${styles.btn} headingM`}
               onClick={() => handleAddNewBoard()}
             >
               + Create New Board

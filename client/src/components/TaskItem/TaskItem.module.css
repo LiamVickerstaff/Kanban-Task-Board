@@ -10,8 +10,6 @@
 }
 
 .container h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
   color: var(--strong-text-clr);
   padding-block-end: 0.8rem;
 }
@@ -21,7 +19,5 @@
 }
 
 .container span {
-  font-size: 1.2rem;
-  font-weight: 700;
   color: var(--soft-text-clr);
 }

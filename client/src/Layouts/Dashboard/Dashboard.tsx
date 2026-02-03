@@ -20,9 +20,8 @@ export default function Dashboard() {
           </p>
           <Button
             padInline={1.2}
-            fontSize={1.5}
-            padBlock={1.2}
             style="primary"
+            size="large"
             callback={() => open(<BoardForm type="Edit" />)}
           >
             + Add New Column

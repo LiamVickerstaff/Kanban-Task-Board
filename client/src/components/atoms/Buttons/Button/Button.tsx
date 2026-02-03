@@ -5,21 +5,21 @@ export default function Button({
   children,
   style = "primary",
   type = "button",
+  size = "small",
   callback,
   padInline,
   padBlock,
   top,
-  fontSize,
   fullWidth,
 }: {
   children: ReactNode;
   style: "primary" | "secondary" | "danger";
   type?: "submit" | "reset" | "button";
+  size?: "large" | "small";
   callback?: () => void;
   padInline?: number;
-  padBlock?: number;
+  padBlock?: number | null;
   top?: number;
-  fontSize?: number;
   fullWidth?: boolean;
 }) {
   return (
@@ -36,8 +36,9 @@ export default function Button({
         style={{
           top: `${top ?? 0}rem`,
           paddingInline: `${padInline ?? 0}rem`,
-          fontSize: `${fontSize ?? 0}rem`,
+          paddingBlock: `${(padBlock ?? size === "large") ? 1.4 : 8}rem`,
         }}
+        className={`${size === "large" ? `headingM` : "bodyL"}`}
       >
         {children}
       </span>

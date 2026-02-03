@@ -11,8 +11,8 @@ export default function TaskItem({ task }: { task: TaskType }) {
       className={styles.container}
       onClick={() => open(<TaskItemInfo task={task} />)}
     >
-      <h3>{task.title}</h3>
-      <span>0 of {task.subtasks.length} subtasks</span>
+      <h3 className="headingM">{task.title}</h3>
+      <span className="bodyM">0 of {task.subtasks.length} subtasks</span>
     </button>
   );
 }

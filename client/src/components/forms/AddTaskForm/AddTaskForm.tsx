@@ -27,7 +27,7 @@ export default function AddTaskForm() {
   return (
     <FormProvider {...methods}>
       <form className="formContainer" onSubmit={methods.handleSubmit(onSubmit)}>
-        <h2>Add New Task</h2>
+        <h2 className="headingL">Add New Task</h2>
         <TextField name="title" label="Title" />
         <TextAreaField name="description" label="Description" />
         <SubtasksField />
@@ -36,7 +36,7 @@ export default function AddTaskForm() {
           label="Status"
           options={["Todo", "Doing", "Completed"]}
         />
-        <Button fontSize={1.3} fullWidth={true} padBlock={0.8} style="primary">
+        <Button fullWidth={true} padBlock={0.8} style="primary">
           Create Task
         </Button>
       </form>

@@ -1,14 +1,15 @@
-import { useState } from "react";
 import styles from "./AppTitle.module.css";
 import KanbanLogo from "../../components/icons/KanbanLogo";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import KanbanTitle from "../../components/icons/KanbanTitle";
 
 export default function AppTitle() {
-  const [isMobileView, setIsMobileView] = useState(true);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div className={styles.container}>
-      <KanbanLogo width={24} height={25} />
-      {!isMobileView && <h1>kanban</h1>}
+      <KanbanLogo />
+      {!isMobile && <KanbanTitle className={styles.kanbanTitle} />}
     </div>
   );
 }

@@ -7,10 +7,9 @@
 
 .topGroup {
   display: flex;
-  padding-inline: 1.6rem;
-  gap: 1.6rem;
-  max-height: 6.4rem;
+  height: fit-content;
   position: relative;
   z-index: 100;
   background-color: var(--foreground-clr);
+  /* border: 1px solid red; */
 }

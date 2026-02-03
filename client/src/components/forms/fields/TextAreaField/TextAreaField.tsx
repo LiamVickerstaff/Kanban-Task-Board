@@ -15,12 +15,12 @@ export default function TextAreaField({ name, label }: Props) {
 
   return (
     <div className={`formFieldContainer`}>
-      <label className={`formFieldLabel`} htmlFor={name}>
+      <label className={`headingS formFieldLabel`} htmlFor={name}>
         {label}
       </label>
 
       <textarea
-        className={`formFieldInput ${styles.description}`}
+        className={`bodyL formFieldInput ${styles.description}`}
         id={name}
         placeholder={placeholderText.description || ""}
         {...register(name)}

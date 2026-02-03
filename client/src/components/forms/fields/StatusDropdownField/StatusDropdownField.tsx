@@ -34,7 +34,7 @@ export default function StatusDropdownField({
 
   return (
     <div className={styles.container}>
-      <label className="formFieldLabel">{label}</label>
+      <label className="headingS formFieldLabel">{label}</label>
       <button
         ref={buttonRef}
         type="button"
@@ -42,7 +42,7 @@ export default function StatusDropdownField({
         className={`${styles.openOptionsBtn} formFieldInput`}
         onClick={toggleDropdown}
       >
-        <span className={styles.currentStatus}>{currentStatus}</span>
+        <span className={`${styles.currentStatus} bodyL`}>{currentStatus}</span>
         <span>
           <DownTick className={styles.downTick} />
         </span>
@@ -63,7 +63,7 @@ export default function StatusDropdownField({
             {options.map((option) => (
               <li key={option} className={styles.optionItem}>
                 <button
-                  className={styles.optionBtn}
+                  className={`bodyL ${styles.optionBtn}`}
                   type="button"
                   onClick={() => handleSelectOption(option)}
                 >

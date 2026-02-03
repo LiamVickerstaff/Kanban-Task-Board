@@ -15,14 +15,14 @@ export default function SubtasksField() {
 
   return (
     <div className="formFieldContainer">
-      <label className="formFieldLabel" htmlFor="subtasks">
+      <label className="headingS formFieldLabel" htmlFor="subtasks">
         Subtasks
       </label>
       <ul className={styles.listGroup} id={"subtasks"}>
         {fields.map((field, index) => (
           <li className={styles.subtaskItem} key={field.id}>
             <input
-              className="formFieldInput"
+              className="bodyL formFieldInput"
               type="text"
               placeholder={placeholderText.subtasks[0] || ""}
               {...register(`subtasks.${index}.title` as const, {
@@ -35,7 +35,6 @@ export default function SubtasksField() {
         ))}
       </ul>
       <Button
-        fontSize={1.3}
         padBlock={0.8}
         style="secondary"
         callback={() => append({ title: "", complete: false })}
