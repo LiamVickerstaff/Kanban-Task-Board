@@ -3,10 +3,10 @@ import KebabIcon from "../../../icons/KebabIcon";
 import { useState } from "react";
 import useModalStore from "../../../../stores/useModalStore";
 import BoardForm from "../../../forms/BoardForm/BoardForm";
-import EditTaskForm from "../../../forms/EditTaskForm/EditTaskForm";
 import type { TaskType } from "../../../../types/taskTypes";
 import DeleteWarning from "../../../modals/DeleteWarning/DeleteWarning";
 import { boardData } from "../../../../sampleTaskData.js";
+import TaskForm from "../../../forms/TaskForm/TaskForm.js";
 
 export default function KebabButton({
   type,
@@ -22,7 +22,7 @@ export default function KebabButton({
   const handleClick = (formType: "edit" | "delete") => {
     if (type === "Task") {
       if (formType === "edit") {
-        open(<EditTaskForm task={task!} />);
+        open(<TaskForm type="Edit" task={task!} />);
       } else {
         open(<DeleteWarning type="task" title={task?.title!} />);
       }

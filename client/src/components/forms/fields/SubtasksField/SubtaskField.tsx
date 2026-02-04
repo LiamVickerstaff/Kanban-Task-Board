@@ -1,12 +1,15 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import styles from "./SubtasksField.module.css";
-import { placeholderText } from "../../../../sampleTaskData.js";
 import type { TaskType } from "../../../../types/taskTypes.js";
 import Button from "../../../atoms/Buttons/Button/Button.js";
 import XButton from "../../../atoms/Buttons/XButton/XButton.js";
 
 export default function SubtasksField() {
-  const { register, control } = useFormContext<TaskType>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<TaskType>();
 
   const { fields, append, remove } = useFieldArray<TaskType, "subtasks", "id">({
     control,
@@ -15,24 +18,42 @@ export default function SubtasksField() {
 
   return (
     <div className="formFieldContainer">
-      <label className="headingS formFieldLabel" htmlFor="subtasks">
+      <label className="headingS formFieldLabel" id="subtasks-label">
         Subtasks
       </label>
-      <ul className={styles.listGroup} id={"subtasks"}>
-        {fields.map((field, index) => (
-          <li className={styles.subtaskItem} key={field.id}>
-            <input
-              className="bodyL formFieldInput"
-              type="text"
-              placeholder={placeholderText.subtasks[0] || ""}
-              {...register(`subtasks.${index}.title` as const, {
-                required: "Required",
-              })}
-              defaultValue={field.title}
-            />
-            <XButton callback={() => remove(index)} />
-          </li>
-        ))}
+      <ul className={styles.listGroup} aria-labelledby="subtasks-label">
+        {fields.map((field, index) => {
+          const error = errors.subtasks?.[index]?.title;
+          const errorId = error ? `subtask-${index}-error` : undefined;
+
+          return (
+            <li className={styles.subtaskItem} key={field.id}>
+              <div
+                className={`formFieldGroup ${error ? "formFieldHasError" : ""}`}
+              >
+                <input
+                  type="text"
+                  className="bodyL formFieldInput"
+                  placeholder={placeholderText[0]}
+                  aria-invalid={error ? "true" : "false"}
+                  aria-describedby={errorId}
+                  {...register(`subtasks.${index}.title` as const, {
+                    required: "Can't be empty",
+                    minLength: { value: 2, message: "Min length: 2" },
+                    maxLength: { value: 50, message: "Max length: 50" },
+                  })}
+                  defaultValue={field.title}
+                />
+                {error && typeof error.message === "string" && (
+                  <p id={errorId} className="formErrorMessage bodyL">
+                    {error.message}
+                  </p>
+                )}
+              </div>
+              <XButton callback={() => remove(index)} />
+            </li>
+          );
+        })}
       </ul>
       <Button
         padBlock={0.8}
@@ -44,3 +65,5 @@ export default function SubtasksField() {
     </div>
   );
 }
+
+const placeholderText = ["e.g. Make Coffee", "e.g. Drink coffee and smile"];

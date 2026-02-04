@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
-import styles from "./BoardForm.module.css";
+// import styles from "./BoardForm.module.css";
 import TextField from "../fields/TextField/TextField.js";
 import Button from "../../atoms/Buttons/Button/Button.js";
 import type { BoardType } from "../../../types/boardTypes.js";
@@ -18,8 +18,8 @@ export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
     defaultValues: defaultFormValues,
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data: BoardType) => {
+    console.log(`Submitting ${type} form: `, data);
   };
 
   return (
@@ -29,7 +29,7 @@ export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
         <TextField name="title" label="Board Name" />
         <ColumnsTagsField />
         <Button type="submit" fullWidth={true} padBlock={0.8} style="primary">
-          Create Task
+          {type} Board
         </Button>
       </form>
     </FormProvider>

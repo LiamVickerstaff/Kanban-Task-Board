@@ -31,6 +31,16 @@
   letter-spacing: 0.4px;
 }
 
+.formFieldGroup {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  width: 100%;
+}
+
 .formFieldInput {
   width: 100%;
   padding-block: 0.8rem;
@@ -38,17 +48,27 @@
 
   background-color: var(--foreground-clr);
   color: var(--strong-text-clr);
-
-  border: 1px solid rgba(130, 143, 163, 0.25);
+  border: 0;
   border-radius: 0.4rem;
+
   outline: none;
 }
 
-.formFieldInput:focus {
+.formFieldGroup:focus {
   border: 1px solid var(--main-purple-hover);
 }
 
 .formFieldInput::placeholder {
   color: var(--strong-text-clr);
   opacity: 0.25;
+}
+
+.formFieldHasError {
+  border: 1px solid var(--btn-danger-bg);
+}
+
+.formErrorMessage {
+  color: var(--text-danger);
+  text-wrap: nowrap;
+  padding-inline-end: 0.8rem;
 }

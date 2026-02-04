@@ -52,6 +52,9 @@
     padding-inline: 2.4rem;
     border-bottom: 1px solid var(--border-lines);
   }
+  .selectBoardBtn {
+    cursor: default;
+  }
 }
 
 @media (min-width: 1240px) {

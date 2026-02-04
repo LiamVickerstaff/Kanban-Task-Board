@@ -35,6 +35,8 @@ export default function StatusDropdownField({
   return (
     <div className={styles.container}>
       <label className="headingS formFieldLabel">{label}</label>
+      <div className="formFieldGroup">
+        
       <button
         ref={buttonRef}
         type="button"
@@ -47,6 +49,7 @@ export default function StatusDropdownField({
           <DownTick className={styles.downTick} />
         </span>
       </button>
+      </div>
       {isOpen &&
         rect &&
         createPortal(
