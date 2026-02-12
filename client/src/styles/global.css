@@ -1,0 +1,74 @@
+.formContainer {
+  /* border: 1px solid red; */
+  padding: 2.4rem;
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 2.4rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  width: clamp(28rem, 90vw, 48rem);
+  scrollbar-width: none;
+}
+
+.formContainer::-webkit-scrollbar {
+  display: none; /* Older Safari and Chromium */
+}
+
+.formContainer h2 {
+  color: var(--strong-text-clr);
+}
+
+.formFieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.formFieldLabel {
+  color: var(--form-label-text-clr);
+  letter-spacing: 0.4px;
+}
+
+.formFieldGroup {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.formFieldInput {
+  width: 100%;
+  padding-block: 0.8rem;
+  padding-inline: 0.8rem;
+
+  background-color: var(--foreground-clr);
+  color: var(--strong-text-clr);
+  border: 0;
+  border-radius: 0.4rem;
+
+  outline: none;
+}
+
+.formFieldGroup:focus {
+  border: 1px solid var(--main-purple-hover);
+}
+
+.formFieldInput::placeholder {
+  color: var(--strong-text-clr);
+  opacity: 0.25;
+}
+
+.formFieldHasError {
+  border: 1px solid var(--btn-danger-bg);
+}
+
+.formErrorMessage {
+  color: var(--text-danger);
+  text-wrap: nowrap;
+  padding-inline-end: 0.8rem;
+}

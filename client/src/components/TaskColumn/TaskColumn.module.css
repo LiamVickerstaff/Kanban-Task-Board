@@ -1,0 +1,34 @@
+.container {
+  min-width: 28rem;
+  height: 100%;
+}
+
+.columnTitle {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin-block-end: 2.4rem;
+}
+
+.columnTitle div {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+
+.columnTitle h3 {
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--soft-text-clr);
+
+  text-wrap: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.container ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

@@ -1,0 +1,48 @@
+.headingXL,
+.headingL,
+.headingM,
+.headingS,
+.bodyM {
+  font-weight: 700;
+}
+
+.headingXL {
+  font-size: 2rem;
+}
+
+.headingL {
+  font-size: 1.8rem;
+}
+
+.headingM {
+  font-size: 1.5rem;
+}
+
+.headingS {
+  font-size: 1.2rem;
+}
+
+.bodyL {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2.3rem;
+}
+
+.bodyM {
+  font-size: 1.2rem;
+}
+
+.createNewTaskFont {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .headingXL {
+    font-size: 2.4rem;
+  }
+
+  .createNewTaskFont {
+    font-size: 1.5rem;
+  }
+}

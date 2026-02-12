@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+
+.openOptionsBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-inline-end: 1.6rem;
+  background-color: var(--foreground-clr);
+  position: relative;
+}
+
+.currentStatus {
+  color: var(--strong-text-clr);
+}
+
+.downTick {
+  transition: transform 0.5s ease;
+}
+
+.openOptionsBtn[data-open="true"] svg {
+  transform: rotate(180deg);
+}
+
+.optionsMenu {
+  padding: 0;
+  list-style: none;
+  border-radius: 0.8rem;
+  background-color: var(--dropdown-bg);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.optionsMenu::-webkit-scrollbar {
+  display: none; /* Older Safari and Chromium */
+}
+
+.optionBtn {
+  width: 100%;
+  text-align: start;
+  padding: 0.6rem 1.6rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--soft-text-clr);
+}
+
+.optionBtn:hover {
+  color: var(--status-option-text-hover);
+  background-color: var(--status-option-bg-hover);
+  font-weight: 700;
+}

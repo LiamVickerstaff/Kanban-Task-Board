@@ -1,0 +1,20 @@
+.btn {
+  background-color: var(--foreground-clr);
+  border: none;
+}
+
+.btn svg {
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+  color: var(--soft-text-clr);
+}
+
+.btn svg:hover {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--red);
+}
+
+.btn svg:active {
+  transform: scale(0.9) rotate(-5deg);
+}

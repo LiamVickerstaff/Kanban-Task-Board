@@ -1,0 +1,21 @@
+.description {
+  line-height: 1.8;
+  resize: none;
+}
+
+.description {
+  resize: none;
+  scrollbar-width: none;
+}
+
+.description::-webkit-scrollbar {
+  width: 0px;
+}
+
+.description::-webkit-scrollbar-track {
+  width: 0px;
+}
+
+.description::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+}

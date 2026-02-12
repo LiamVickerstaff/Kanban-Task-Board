@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 1.6rem;
+  gap: 1.6rem;
+  width: 5.6rem;
+}
+
+.kanbanTitle {
+  color: var(--strong-text-clr);
+}
+
+@media (min-width: 768px) {
+  .container {
+    border-right: 1px solid var(--border-lines);
+    padding-inline: 2.4rem;
+  }
+
+  .sidebarOpen {
+    width: 26rem;
+  }
+
+  .sidebarClosed {
+    width: fit-content;
+    border-bottom: 1px solid var(--border-lines);
+  }
+}
+
+@media (min-width: 1240px) {
+  .container {
+    padding-inline-start: 3.4rem;
+  }
+
+  .sidebarOpen,
+  .sidebarClosed {
+    width: 30rem;
+  }
+}

@@ -1,0 +1,55 @@
+.container {
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  width: clamp(28rem, 80vw, 48rem);
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+
+.titleGroup svg {
+  flex-shrink: 0;
+}
+
+.title {
+  flex: 1;
+  font-size: 1.8rem;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--strong-text-clr);
+  min-width: 0;
+}
+
+.description {
+  color: var(--soft-text-clr);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 23px;
+}
+
+.subtaskGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.subtaskGroup p,
+.statusLabel {
+  font-size: 1.2rem;
+  color: var(--form-label-text-clr);
+  font-weight: 600;
+}
+
+.subtaskGroup ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}

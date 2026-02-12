@@ -1,0 +1,64 @@
+.container {
+  flex: 1;
+  padding-block: 1.6rem;
+  padding-inline-end: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btn,
+.addNewTaskBtn {
+  border: none;
+  padding: 0;
+}
+
+.selectBoardBtn {
+  background-color: var(--foreground-clr);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.currentBoardTitle {
+  color: var(--strong-text-clr);
+}
+
+.downTick {
+  position: relative;
+  top: 0.2rem;
+}
+
+.groupPlusKebab {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.addNewTaskBtn {
+  background-color: var(--btn-primary-bg);
+  padding-block: 1rem;
+  padding-inline: 1.8rem;
+  border-radius: 2.4rem;
+  color: var(--btn-primary-text);
+}
+
+.addNewTaskBtn:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2.4rem;
+    border-bottom: 1px solid var(--border-lines);
+  }
+  .selectBoardBtn {
+    cursor: default;
+  }
+}
+
+@media (min-width: 1240px) {
+  .container {
+    padding-inline-end: 3.2rem;
+  }
+}

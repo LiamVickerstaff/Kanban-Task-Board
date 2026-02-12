@@ -1,0 +1,34 @@
+.pageOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContainer {
+  background-color: var(--foreground-clr);
+  margin-inline: 2rem;
+  min-width: 30rem;
+  max-height: 90vh;
+  position: fixed;
+  border-radius: 0.6rem;
+}
+
+.modalScrollArea {
+  max-height: 90vh;
+  height: fit-content;
+  overflow-y: auto;
+  width: 100%;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.modalScrollArea::-webkit-scrollbar {
+  display: none;
+}

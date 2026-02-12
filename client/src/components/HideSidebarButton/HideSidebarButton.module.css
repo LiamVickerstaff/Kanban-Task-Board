@@ -1,0 +1,30 @@
+.container {
+  width: 94%;
+  height: 4.8rem;
+
+  padding-inline-start: 2.4rem;
+  margin-block-start: 1.6rem;
+  margin-inline-end: 1.6rem;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  border: none;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  outline: none;
+
+  background-color: var(--foreground-clr);
+  color: var(--soft-text-clr);
+}
+
+.container:hover {
+  background-color: var(--btn-secondary-bg-hover);
+  color: var(--btn-secondary-text);
+}
+
+.container p {
+  position: relative;
+  bottom: 0.1rem;
+}

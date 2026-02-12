@@ -1,0 +1,45 @@
+.container {
+  background-color: var(--background-clr);
+  width: 100%;
+  height: 100%;
+  padding-inline: 1.6rem;
+  overflow-x: scroll;
+  resize: none;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  width: 0px;
+}
+
+.container::-webkit-scrollbar-track {
+  width: 0px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+}
+
+.noColumnsGroup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.emptyColumnsMessage {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--medium-grey);
+  text-align: center;
+}
+
+.populatedContainer {
+  width: fit-content;
+  display: flex;
+  padding-block-start: 2.4rem;
+  gap: 2.4rem;
+}

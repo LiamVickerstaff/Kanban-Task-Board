@@ -1,0 +1,13 @@
+.listGroup {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-block-end: 0.4rem;
+}
+
+.tagItem {
+  display: flex;
+  gap: 0.8rem;
+}
