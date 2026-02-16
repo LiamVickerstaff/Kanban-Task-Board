@@ -1,29 +1,30 @@
-export type SubtaskType = {
+export type Subtask = {
+  id: string;
   title: string;
   complete: boolean;
+  taskId?: string;
 };
 
-export type TaskType = {
+export type Task = {
   id: string;
   columnId: string;
   title: string;
   order: number;
   description: string;
-  subtasks: SubtaskType[];
-  status: string;
+  subtasks: Subtask[];
 };
 
-export type ColumnType = {
-  id?: string;
+export type Column = {
+  id: string;
   order: number;
   title: string;
-  tasks?: TaskType[];
+  tasks?: Task[];
 };
 
 export type Board = {
   id: string;
   title: string;
-  columns?: ColumnType[];
+  columns?: Column[];
 };
 
 export type User = {

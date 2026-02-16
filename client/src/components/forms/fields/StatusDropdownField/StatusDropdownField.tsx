@@ -8,13 +8,19 @@ export default function StatusDropdownField({
   name,
   label,
   options,
+  onStatusChange,
 }: {
   name: string;
   label: string;
-  options: string[];
+  options: { label: string; value: string }[];
+  onStatusChange?: (newColumnId: string) => void;
 }) {
   const { setValue, watch } = useFormContext();
-  const currentStatus = watch(name);
+  const currentValue = watch(name);
+
+  const selectedOption = options.find(
+    (option) => option.value === currentValue,
+  )?.label;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,6 +35,11 @@ export default function StatusDropdownField({
 
   const handleSelectOption = (option: string) => {
     setValue(name, option);
+
+    if (onStatusChange) {
+      onStatusChange(option);
+    }
+
     setIsOpen(false);
   };
 
@@ -36,19 +47,20 @@ export default function StatusDropdownField({
     <div className={styles.container}>
       <label className="headingS formFieldLabel">{label}</label>
       <div className="formFieldGroup">
-        
-      <button
-        ref={buttonRef}
-        type="button"
-        data-open={isOpen}
-        className={`${styles.openOptionsBtn} formFieldInput`}
-        onClick={toggleDropdown}
-      >
-        <span className={`${styles.currentStatus} bodyL`}>{currentStatus}</span>
-        <span>
-          <DownTick className={styles.downTick} />
-        </span>
-      </button>
+        <button
+          ref={buttonRef}
+          type="button"
+          data-open={isOpen}
+          className={`${styles.openOptionsBtn} formFieldInput`}
+          onClick={toggleDropdown}
+        >
+          <span className={`${styles.currentStatus} bodyL`}>
+            {selectedOption ?? "Select status"}
+          </span>
+          <span>
+            <DownTick className={styles.downTick} />
+          </span>
+        </button>
       </div>
       {isOpen &&
         rect &&
@@ -64,13 +76,13 @@ export default function StatusDropdownField({
             }}
           >
             {options.map((option) => (
-              <li key={option} className={styles.optionItem}>
+              <li key={option.value} className={styles.optionItem}>
                 <button
                   className={`bodyL ${styles.optionBtn}`}
                   type="button"
-                  onClick={() => handleSelectOption(option)}
+                  onClick={() => handleSelectOption(option.value)}
                 >
-                  {option}
+                  {option.label}
                 </button>
               </li>
             ))}

@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import userRouter from "./routers/user";
 import taskRouter from "./routers/task";
+import subtaskRouter from "./routers/subtask";
 import boardRouter from "./routers/board";
 import { mockUserMiddleware } from "./middleware/mockUser.js";
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/user", userRouter);
 app.use("/task", taskRouter);
+app.use("/subtask", subtaskRouter);
 app.use("/board", boardRouter);
 
 app.get("/", (req: Request, res: Response) => {

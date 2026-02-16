@@ -1,21 +1,26 @@
 import type { Board } from "../../types/dataTypes";
-import type { BoardFormData } from "../../types/formTypes";
+import type { BoardApiBody } from "../../types/formTypes";
 import api from "../apiMethods";
 
 export const getBoardOfId = (boardId: string): Promise<Board> => {
   return api.get<Board>(`/board/${boardId}`);
 };
 
-export const createBoard = (newBoard: BoardFormData): Promise<Board> => {
-  console.log("called createBoard fetch: ", newBoard);
-
-  return api.post<Board, BoardFormData>("/board/new", newBoard);
+export const getAllBoardsOfUserId = (userId: string): Promise<Board[]> => {
+  return api.get<Board[]>(`/board/all/${userId}`);
 };
 
-export const updateBoard = (board: Board): Promise<Board> => {
-  return api.put(`/board/${board.id}`, board);
+export const createBoard = (newBoard: BoardApiBody): Promise<Board> => {
+  return api.post<Board, BoardApiBody>("/board/new", newBoard);
 };
 
-export const deleteBoard = (boardId: string): Promise<string> => {
-  return api.del(`/board/${boardId}`);
+export const updateBoard = (updatedBoard: BoardApiBody): Promise<Board> => {
+  return api.put<Board, BoardApiBody>(
+    `/board/${updatedBoard.id}`,
+    updatedBoard,
+  );
+};
+
+export const deleteBoard = (boardId: string): Promise<Board> => {
+  return api.del<Board>(`/board/${boardId}`);
 };

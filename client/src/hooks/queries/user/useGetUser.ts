@@ -1,15 +1,13 @@
-import { getUser } from "../../api/domains/user";
-import { useUserStore } from "../../stores/useUserStore";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../../../api/domains/user";
 
-export const useGetUser = async (userId: string) => {
-  const setUser = useUserStore((s) => s.setUser);
+export const useGetUser = (userId: string) => {
+  const query = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => getUser(userId),
+    enabled: !!userId,
+    staleTime: 1000 * 60 * 5,
+  });
 
-  try {
-    // Get user
-    const user = await getUser(userId);
-    // Set global user data with zustand
-    setUser(user);
-  } catch (error) {
-    console.error(error.)
-  }
+  return query;
 };

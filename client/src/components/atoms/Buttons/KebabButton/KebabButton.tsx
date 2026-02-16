@@ -5,14 +5,16 @@ import useModalStore from "../../../../stores/useModalStore";
 import BoardForm from "../../../forms/BoardForm/BoardForm";
 import DeleteWarning from "../../../modals/DeleteWarning/DeleteWarning";
 import TaskForm from "../../../forms/TaskForm/TaskForm.js";
-import type { BoardType, TaskType } from "../../../../types/board.js";
+import type { Board, Task } from "../../../../types/dataTypes.js";
 
 export default function KebabButton({
   type,
   item,
+  disabled = false,
 }: {
   type: "Task" | "Board";
-  item: BoardType | TaskType;
+  item: Board | Task;
+  disabled?: boolean;
 }) {
   const open = useModalStore((s) => s.open);
 
@@ -21,15 +23,15 @@ export default function KebabButton({
   const handleClick = (formType: "edit" | "delete") => {
     if (type === "Task") {
       if (formType === "edit") {
-        open(<TaskForm type="Edit" task={item as TaskType} />);
+        open(<TaskForm type="Edit" task={item as Task} />);
       } else {
-        open(<DeleteWarning type="task" item={item as TaskType} />);
+        open(<DeleteWarning type="task" id={item.id} title={item.title} />);
       }
-    } else {
+    } else if (type === "Board") {
       if (formType === "edit") {
-        open(<BoardForm type="Edit" board={item as BoardType} />);
+        open(<BoardForm type="Edit" />);
       } else {
-        open(<DeleteWarning type="board" item={item as BoardType} />);
+        open(<DeleteWarning type="board" id={item.id} title={item.title} />);
       }
     }
 
@@ -41,6 +43,7 @@ export default function KebabButton({
       <button
         className={`${styles.btn}`}
         onClick={() => setIsOpen((prev) => !prev)}
+        disabled={disabled}
       >
         <KebabIcon />
       </button>

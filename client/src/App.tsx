@@ -9,11 +9,8 @@ import OpenSidebarButton from "./components/OpenSidebarButton/OpenSidebarButton"
 import Sidebar from "./Layouts/Sidebar/Sidebar";
 import useMediaQuery from "./hooks/useMediaQuery";
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getUser } from "./api/domains/user";
 import { useUserStore } from "./stores/useUserStore";
-// import { useMutation } from "@tanstack/react-query";
-// import { createUser } from "./api/domains/user";
+import { useGetUser } from "./hooks/queries/user/useGetUser";
 
 function App() {
   const { isOpen: sidebarIsOpen, openSideBar } = useSidebarStore();
@@ -28,19 +25,13 @@ function App() {
     }
   }, [isMobile]);
 
-  const { data } = useQuery({
-    queryKey: ["user", userId],
-    queryFn: () => getUser(userId),
-    enabled: !!userId,
-    staleTime: 1000 * 60 * 3,
-  });
+  const { data: userData } = useGetUser(userId);
 
   useEffect(() => {
-    if (!data) return;
-    
-    console.log("Fetched User nice: ", data);
-    setUser(data);
-  }, [data]);
+    if (!userData) return;
+
+    setUser(userData);
+  }, [userData]);
 
   return (
     <div className={styles.container}>

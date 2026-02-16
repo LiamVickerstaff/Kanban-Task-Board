@@ -2,16 +2,16 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import styles from "./ColumnTagsField.module.css";
 import Button from "../../../atoms/Buttons/Button/Button.js";
 import XButton from "../../../atoms/Buttons/XButton/XButton.js";
-import type { BoardType } from "../../../../types/board.js";
+import type { BoardFormData } from "../../../../types/formTypes.js";
 
 export default function ColumnsTagsField() {
   const {
     register,
     control,
     formState: { errors },
-  } = useFormContext<BoardType>();
+  } = useFormContext<BoardFormData>();
 
-  const { fields, append, remove } = useFieldArray<BoardType, "columns", "id">({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "columns",
   });
@@ -37,12 +37,11 @@ export default function ColumnsTagsField() {
                   placeholder={placeholderText[index]}
                   aria-invalid={error ? "true" : "false"}
                   aria-describedby={errorId}
-                  {...register(`columns.${index}.title` as const, {
+                  {...register(`columns.${index}.title`, {
                     required: "Can't be empty",
                     minLength: { value: 2, message: "Min length: 2" },
                     maxLength: { value: 50, message: "Max length: 50" },
                   })}
-                  defaultValue={field.title}
                 />
                 {error && typeof error.message === "string" && (
                   <p id={errorId} className="formErrorMessage bodyL">
@@ -58,7 +57,7 @@ export default function ColumnsTagsField() {
       <Button
         padBlock={0.8}
         style="secondary"
-        callback={() => append({ order: fields.length + 1, title: "" })}
+        callback={() => append({ title: "" })}
       >
         + Add New Column
       </Button>

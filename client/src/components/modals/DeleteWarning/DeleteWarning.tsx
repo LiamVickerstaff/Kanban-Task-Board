@@ -1,51 +1,32 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useModalStore from "../../../stores/useModalStore";
 import Button from "../../atoms/Buttons/Button/Button";
 import styles from "./DeleteWarning.module.css";
-import { useEffect } from "react";
-import type { Board, TaskType } from "../../../types/dataTypes";
-import { deleteBoard } from "../../../api/domains/boardsApi";
-import { deleteTask } from "../../../api/domains/tasksApi";
+import { useDeleteTask } from "../../../hooks/mutations/task/useDeleteTask";
+import { useDeleteBoard } from "../../../hooks/mutations/board/useDeleteBoard";
+// import { useDeleteColumn } from "../../../hooks/mutations/column/useDeleteColumn";
 
 export default function DeleteWarning({
   type,
-  item,
+  title,
+  id,
 }: {
-  type: "board" | "task";
-  item: Board | TaskType;
+  type: "task" | "board" | "column";
+  title: string;
+  id: string;
 }) {
   const close = useModalStore((s) => s.close);
 
-  useEffect(() => {
-    console.log("item id:", item.id);
-  }, [item]);
-
-  const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
-    mutationFn:
-      type === "board" ? () => deleteBoard(item.id) : () => deleteTask(item.id),
-
-    onSuccess: (data) => {
-      if (type === "board") {
-        queryClient.invalidateQueries({ queryKey: ["boards"] });
-      } else {
-        queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      }
-      alert(data.message);
-      close();
-    },
-
-    onError: (error) => {
-      alert(`Failed to delete ${type} of id: ${item.id}. Error: ${error}`);
-    },
-  });
+  const { mutate: mutateDeleteTask, isPending: deleteTaskIsPending } =
+    useDeleteTask();
+  const { mutate: mutateDeleteBoard, isPending: deleteBoardIsPending } =
+    useDeleteBoard();
+  // const { mutate: mutateDeleteColumn } = useDeleteColumn();
 
   return (
     <div className={styles.container}>
       <h2>Delete this {type}?</h2>
       <p>
-        Are you sure you want to delete the <b>'{item.title}'</b> {type}? This
-        action will remove all columns and tasks and cannot be reversed.
+        Are you sure you want to delete the '{title}' {type}? {message[type]}
       </p>
       <div className={styles.btnGroup}>
         <Button
@@ -53,10 +34,17 @@ export default function DeleteWarning({
           style="danger"
           fullWidth={true}
           padBlock={0.8}
-          callback={mutate}
-          disabled={isPending}
+          callback={
+            type === "board"
+              ? () => mutateDeleteBoard(id)
+              : () => mutateDeleteTask(id)
+            // : () => mutateDeleteColumn(id)
+          }
+          disabled={deleteBoardIsPending || deleteTaskIsPending}
         >
-          {isPending ? "Deleting..." : "Delete"}
+          {deleteBoardIsPending || deleteTaskIsPending
+            ? "Deleting..."
+            : "Delete"}
         </Button>
         <Button
           type="button"
@@ -71,3 +59,11 @@ export default function DeleteWarning({
     </div>
   );
 }
+
+const message = {
+  board:
+    "This action will remove all columns and tasks and cannot be reversed.",
+  task: "This action will permenantly delete the task.",
+  column:
+    "This action will remove the column as well as all tasks and subtasks belonging to it.",
+};

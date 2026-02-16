@@ -1,5 +1,5 @@
 .container {
-  min-width: 28rem;
+  width: 28rem;
   height: 100%;
 }
 
@@ -21,6 +21,7 @@
   text-transform: uppercase;
   color: var(--soft-text-clr);
 
+  max-width: 100%;
   text-wrap: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;

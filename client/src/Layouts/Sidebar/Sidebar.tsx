@@ -8,14 +8,27 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import HideSidebarButton from "../../components/HideSidebarButton/HideSidebarButton";
 import type { Board } from "../../types/dataTypes";
 import { useUserStore } from "../../stores/useUserStore";
+import { useGetAllBoards } from "../../hooks/queries/board/useGetAllBoards";
+import { useEffect } from "react";
 
 export default function Sidebar() {
   const { isOpen, toggleSidebar, closeSideBar } = useSidebarStore();
-  const { boards, currentBoard, setCurrentBoard } = useUserStore();
-
+  const { currentBoardId, setCurrentBoardId } = useUserStore();
   const isMobile = useMediaQuery("(max-width: 767px)");
-
   const open = useModalStore((s) => s.open);
+
+  const {
+    data: boardsData,
+    isPending: isPendingBoards,
+    isError: boardsHasError,
+  } = useGetAllBoards();
+
+  useEffect(() => {
+    if (!boardsData) return;
+    if (currentBoardId) return;
+
+    setCurrentBoardId(boardsData[0].id);
+  }, [boardsData]);
 
   const handleAddNewBoard = () => {
     if (isMobile) {
@@ -25,11 +38,49 @@ export default function Sidebar() {
   };
 
   const handleSelectBoard = (board: Board) => {
-    setCurrentBoard(board);
+    setCurrentBoardId(board.id);
     if (isMobile) {
       closeSideBar();
     }
   };
+
+  if (isPendingBoards) {
+    return (
+      <div
+        className={styles.pageOverlay}
+        onClick={() => isOpen && toggleSidebar()}
+      >
+        <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+          <ul className={styles.boardsList}>
+            <p>Loading...</p>
+          </ul>
+          <div className={styles.bottomGroup}>
+            <LightDarkSwitch />
+            {!isMobile && <HideSidebarButton />}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (boardsHasError) {
+    return (
+      <div
+        className={styles.pageOverlay}
+        onClick={() => isOpen && toggleSidebar()}
+      >
+        <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+          <ul className={styles.boardsList}>
+            <p>Failed to load boards. Please try to refresh your page.</p>
+          </ul>
+          <div className={styles.bottomGroup}>
+            <LightDarkSwitch />
+            {!isMobile && <HideSidebarButton />}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -37,14 +88,14 @@ export default function Sidebar() {
       onClick={() => isOpen && toggleSidebar()}
     >
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <h3 className="headingS">ALL BOARDS ({sampleBoardData.length})</h3>
+        <h3 className="headingS">ALL BOARDS ({boardsData?.length ?? "..."})</h3>
         <ul className={styles.boardsList}>
-          {boards && boards.length > 0 ? (
-            boards.map((board) => (
+          {boardsData && boardsData.length > 0 ? (
+            boardsData.map((board) => (
               <li key={board.id} className={`${styles.boardItem}`}>
                 <button
                   className={`${styles.btn} headingM
-                ${currentBoard.title === board.title ? styles.active : styles.inactive}
+                ${currentBoardId === board.id ? styles.active : styles.inactive}
                 `}
                   onClick={() => {
                     handleSelectBoard(board);
@@ -75,21 +126,3 @@ export default function Sidebar() {
     </div>
   );
 }
-
-const sampleBoardData = [
-  {
-    id: "ebfi1303n",
-    title: "Platform Launch",
-    columns: [{ title: "Todo" }, { title: "Doing" }, { title: "Done" }],
-  },
-  {
-    id: "943nq94",
-    title: "Marketing Plan",
-    columns: [{ title: "Todo" }, { title: "Doing" }, { title: "Done" }],
-  },
-  {
-    id: "lapei2p1",
-    title: "Roadmap",
-    columns: [{ title: "Todo" }, { title: "Doing" }, { title: "Done" }],
-  },
-];

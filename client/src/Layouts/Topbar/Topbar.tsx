@@ -6,13 +6,44 @@ import useSidebarStore from "../../stores/useSidebarStore";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import PlusIcon from "../../components/icons/PlusIcon";
 import TaskForm from "../../components/forms/TaskForm/TaskForm";
-import { useUserStore } from "../../stores/useUserStore";
+import { useGetCurrentBoard } from "../../hooks/queries/board/useGetCurrentBoard";
 
 export default function Topbar() {
   const open = useModalStore((s) => s.open);
   const toggleSidebar = useSidebarStore((s) => s.toggleSidebar);
-  const currentBoard = useUserStore((s) => s.currentBoard);
   const isMobile = useMediaQuery("(max-width: 767px)");
+
+  const { data: boardData, isPending } = useGetCurrentBoard();
+
+  if (!boardData)
+    return (
+      <div className={styles.container}>
+        <button
+          className={`${styles.btn} ${styles.selectBoardBtn}`}
+          onClick={() => toggleSidebar()}
+          disabled={!isMobile}
+        >
+          <h2 className={`headingXL ${styles.currentBoardTitle}`}>
+            Failed to load board
+          </h2>
+          {isMobile && <DownTick className={styles.downTick} />}
+        </button>
+        <div className={styles.groupPlusKebab}>
+          <button
+            className={`${styles.addNewTaskBtn} headingM`}
+            onClick={() => open(<TaskForm type="Add" />)}
+            disabled={true}
+          >
+            {isMobile ? <PlusIcon /> : "+ Add New Task"}
+          </button>
+          <KebabButton
+            type="Board"
+            item={{ id: "", title: "" }}
+            disabled={true}
+          />
+        </div>
+      </div>
+    );
 
   return (
     <div className={styles.container}>
@@ -22,7 +53,7 @@ export default function Topbar() {
         disabled={!isMobile}
       >
         <h2 className={`headingXL ${styles.currentBoardTitle}`}>
-          {currentBoard.title}
+          {isPending ? "Loading..." : boardData.title}
         </h2>
         {isMobile && <DownTick className={styles.downTick} />}
       </button>
@@ -33,7 +64,7 @@ export default function Topbar() {
         >
           {isMobile ? <PlusIcon /> : "+ Add New Task"}
         </button>
-        <KebabButton type="Board" item={currentBoard} />
+        <KebabButton type="Board" item={boardData} />
       </div>
     </div>
   );

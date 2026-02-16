@@ -2,16 +2,16 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import styles from "./SubtasksField.module.css";
 import Button from "../../../atoms/Buttons/Button/Button.js";
 import XButton from "../../../atoms/Buttons/XButton/XButton.js";
-import type { TaskType } from "../../../../types/board.js";
+import type { Task } from "../../../../types/dataTypes.js";
 
 export default function SubtasksField() {
   const {
     register,
     control,
     formState: { errors },
-  } = useFormContext<TaskType>();
+  } = useFormContext<Task>();
 
-  const { fields, append, remove } = useFieldArray<TaskType, "subtasks", "id">({
+  const { fields, append, remove } = useFieldArray<Task, "subtasks", "id">({
     control,
     name: "subtasks",
   });

@@ -3,14 +3,37 @@ import StatusDropdownField from "../forms/fields/StatusDropdownField/StatusDropd
 import styles from "./TaskItemInfo.module.css";
 import KebabButton from "../atoms/Buttons/KebabButton/KebabButton";
 import SubtaskItem from "../SubtaskItem/SubtaskItem";
-import type { TaskType } from "../../types/board";
+import { useGetCurrentBoard } from "../../hooks/queries/board/useGetCurrentBoard";
+import { useChangeTaskStatus } from "../../hooks/mutations/task/useChangeTaskStatus";
 
-export default function TaskItemInfo({ task }: { task: TaskType }) {
-  const methods = useForm({
+export default function TaskItemInfo({ taskId }: { taskId: string }) {
+  const { data: boardData } = useGetCurrentBoard();
+  const { mutate } = useChangeTaskStatus();
+
+  if (!boardData) return null;
+
+  const task = boardData.columns
+    ?.flatMap((col) => col.tasks ?? [])
+    .find((t) => t.id === taskId);
+
+  if (!task) return null;
+
+  const methods = useForm<{
+    columnId: string;
+  }>({
     defaultValues: {
-      status: "Todo",
+      columnId: task.columnId,
     },
   });
+
+  const handleOnStatusChange = (newColumnId: string) => {
+    if (newColumnId !== task.columnId) {
+      mutate({
+        taskId: task.id,
+        newColumnId,
+      });
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -29,9 +52,13 @@ export default function TaskItemInfo({ task }: { task: TaskType }) {
       </div>
       <FormProvider {...methods}>
         <StatusDropdownField
-          name="status"
+          name="columnId"
           label="Current Status"
-          options={["Todo", "Doing", "Completed"]}
+          options={(boardData?.columns ?? []).map((column) => ({
+            label: column.title,
+            value: column.id,
+          }))}
+          onStatusChange={handleOnStatusChange}
         />
       </FormProvider>
     </div>

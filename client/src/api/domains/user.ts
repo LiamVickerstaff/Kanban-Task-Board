@@ -3,7 +3,6 @@ import api from "../apiMethods";
 
 export const getUser = async (userId: string): Promise<User> => {
   const user = await api.get<User>(`/user/${userId}`);
-  console.log("response from api.get(): user = ", user);
   return user;
 };
 

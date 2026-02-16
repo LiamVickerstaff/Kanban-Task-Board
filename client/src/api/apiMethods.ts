@@ -13,6 +13,7 @@ const api = {
     config?: AxiosRequestConfig,
   ): Promise<T> => {
     const data = await axiosClient.post<T>(endpoint, body, config);
+    console.log("data returned inside apiMethods .post() call: ", data);
     return data as T;
   },
 

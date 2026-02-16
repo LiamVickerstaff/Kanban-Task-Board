@@ -3,51 +3,47 @@ import { FormProvider, useForm } from "react-hook-form";
 import TextField from "../fields/TextField/TextField.js";
 import Button from "../../atoms/Buttons/Button/Button.js";
 import ColumnsTagsField from "../fields/ColumnTagsField/ColumnTagsField.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useModalStore from "../../../stores/useModalStore.js";
-import { createBoard, updateBoard } from "../../../api/domains/boardsApi.js";
-import type { Board } from "../../../types/dataTypes.js";
 import { useUserStore } from "../../../stores/useUserStore.js";
 import type { BoardFormData } from "../../../types/formTypes.js";
+import { useCreateBoard } from "../../../hooks/mutations/board/useCreateBoard.js";
+import { useUpdateBoard } from "../../../hooks/mutations/board/useUpdateBoard.js";
+import { useGetCurrentBoard } from "../../../hooks/queries/board/useGetCurrentBoard.js";
+import { useEffect } from "react";
 
-export default function BoardForm({
-  type,
-  board,
-}: {
-  type: "Add New" | "Edit";
-  board?: Board;
-}) {
+export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
   // useModalStore state
-  const close = useModalStore((s) => s.close);
-  const userId = useUserStore((s) => s.id);
+  const { id: userId } = useUserStore();
+
+  const { data: board } = useGetCurrentBoard();
 
   // Tanstack mutation
-  const queryClient = useQueryClient();
-  const createBoardMutation = useMutation({
-    mutationFn: createBoard,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["boards"] });
-      close();
-    },
-    onError: () => {
-      alert("Failed to save board changes");
-    },
-  });
+  const { mutate: createBoardMutation, isPending: createBoardIsPending } =
+    useCreateBoard();
+  const { mutate: updateBoardMutation, isPending: updateBoardIsPending } =
+    useUpdateBoard();
 
   // React hook forms
-  const defaultFormValues = type === "Add New" ? emptyBoardValues : board;
   const methods = useForm<BoardFormData>({
-    defaultValues: defaultFormValues,
+    defaultValues: emptyBoardValues,
   });
+
+  useEffect(() => {
+    if (type === "Edit" && board) {
+      methods.reset(board);
+    }
+  }, [type, board, methods.reset]);
 
   // Functions
   const onSubmit = (data: BoardFormData) => {
+    const normalizedColumns = data.columns.map((col, index) => ({
+      ...col,
+      order: index,
+    }));
     if (type === "Add New") {
-      createBoardMutation.mutate({ ...data, userId });
+      createBoardMutation({ ...data, columns: normalizedColumns, userId });
     } else {
-      console.log("edit form submit");
+      updateBoardMutation({ ...data, columns: normalizedColumns });
     }
-    console.log(`Submitting ${type} form: `, data);
   };
 
   return (
@@ -61,9 +57,11 @@ export default function BoardForm({
           fullWidth={true}
           padBlock={0.8}
           style="primary"
-          disabled={createBoardMutation.isPending}
+          disabled={createBoardIsPending || updateBoardIsPending}
         >
-          {createBoardMutation.isPending ? "Saving..." : `${type} Board`}
+          {createBoardIsPending || updateBoardIsPending
+            ? "Saving..."
+            : `${type} Board`}
         </Button>
       </form>
     </FormProvider>
@@ -72,9 +70,5 @@ export default function BoardForm({
 
 const emptyBoardValues = {
   title: "",
-  columns: [
-    { order: 0, title: "" },
-    { order: 1, title: "" },
-    { order: 2, title: "" },
-  ],
+  columns: [{ title: "" }, { title: "" }, { title: "" }],
 };
