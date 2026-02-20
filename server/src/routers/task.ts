@@ -64,17 +64,42 @@ router.put("/change-status", async (req: Request, res: Response) => {
       },
     });
 
-    return res
-      .status(200)
-      .json({
-        message: `Updated subtasks for task: ${taskId}`,
-        data: updatedTask,
-      });
+    return res.status(200).json({
+      message: `Updated subtasks for task: ${taskId}`,
+      data: updatedTask,
+    });
   } catch (error) {
     console.error(error);
     return res
       .status(500)
       .json({ message: "Failed to change status of task", error });
+  }
+});
+router.put("/update-orders", async (req: Request, res: Response) => {
+  const { changedTasks } = req.body;
+
+  try {
+    const updatedTasks = await prisma.$transaction(
+      changedTasks.map((task: { id: string; order: number }) =>
+        prisma.task.update({
+          where: { id: task.id },
+          data: { order: Number(task.order) },
+          include: {
+            subtasks: true,
+          },
+        }),
+      ),
+    );
+
+    return res.status(200).json({
+      message: `Successfully updated orders of tasks`,
+      data: updatedTasks,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Failed to update orders of tasks", error });
   }
 });
 

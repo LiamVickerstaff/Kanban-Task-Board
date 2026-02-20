@@ -14,6 +14,12 @@ export type Task = {
   subtasks: Subtask[];
 };
 
+export type TaskOrder = {
+  id: string;
+  order: number;
+  columnId: string;
+};
+
 export type Column = {
   id: string;
   order: number;

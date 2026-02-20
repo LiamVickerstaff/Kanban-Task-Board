@@ -35,6 +35,10 @@ export default function TaskItemInfo({ taskId }: { taskId: string }) {
     }
   };
 
+  const completedSubtasks = (task.subtasks ?? []).filter(
+    (sub) => sub.complete,
+  ).length;
+
   return (
     <div className={styles.container}>
       <div className={styles.titleGroup}>
@@ -43,7 +47,9 @@ export default function TaskItemInfo({ taskId }: { taskId: string }) {
       </div>
       <p className={styles.description}>{task.description ?? "---"}</p>
       <div className={styles.subtaskGroup}>
-        <p>Subtasks (2 of {task.subtasks.length})</p>
+        <p>
+          Subtasks ({completedSubtasks} of {task.subtasks.length ?? 0})
+        </p>
         <ul className={styles.subtaskList}>
           {task.subtasks.map((sub) => (
             <SubtaskItem key={sub.title} subtask={sub} />
