@@ -4,11 +4,9 @@ import TaskItem from "../TaskItem/TaskItem";
 import styles from "./Column.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useUpdateTaskOrders } from "../../hooks/mutations/task/useUpdateTaskOrders";
-import { useUserStore } from "../../stores/useUserStore";
 
 export default function Column({ column }: { column: Column }) {
-  const currentBoardId = useUserStore((s) => s.currentBoardId);
-  const { mutate: mutateTaskOrders } = useUpdateTaskOrders(currentBoardId);
+  const { mutate: mutateTaskOrders } = useUpdateTaskOrders();
 
   const [tasks, setTasks] = useState(column.tasks ?? []);
   const columnRef = useRef(null);
@@ -52,7 +50,7 @@ export default function Column({ column }: { column: Column }) {
   return (
     <div className={styles.container}>
       <div className={styles.columnTitle}>
-        <div style={{ backgroundColor: "blue" }}></div>
+        <div className={styles.columnDot}></div>
         <h3 className="headingS">
           {column.title} ({column.tasks?.length})
         </h3>

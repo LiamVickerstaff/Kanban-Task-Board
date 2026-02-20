@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useModalStore from "../../../stores/useModalStore";
 import { deleteBoard } from "../../../api/domains/boardsApi";
 import { useUserStore } from "../../../stores/useUserStore";
+import type { Board } from "../../../types/dataTypes";
 
 export const useDeleteBoard = () => {
   const close = useModalStore((s) => s.close);
@@ -19,7 +20,7 @@ export const useDeleteBoard = () => {
       // Update user's boards cache
       queryClient.setQueryData(
         ["boards", userId],
-        (old: any[] | undefined) =>
+        (old: Board[] = []) =>
           old?.filter((b) => b.id !== deletedBoard.id) ?? [],
       );
 
@@ -27,7 +28,12 @@ export const useDeleteBoard = () => {
       const updatedBoards =
         queryClient.getQueryData<any[]>(["boards", userId]) ?? [];
 
-      setCurrentBoardId(updatedBoards[0].title ?? "");
+      console.log(
+        "current boards inside [`boards`, userId] cache: ",
+        updatedBoards,
+      );
+
+      setCurrentBoardId(updatedBoards[0].id ?? "");
       close();
     },
 

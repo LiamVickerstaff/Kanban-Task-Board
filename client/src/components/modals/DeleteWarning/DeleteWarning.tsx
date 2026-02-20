@@ -20,7 +20,6 @@ export default function DeleteWarning({
     useDeleteTask();
   const { mutate: mutateDeleteBoard, isPending: deleteBoardIsPending } =
     useDeleteBoard();
-  // const { mutate: mutateDeleteColumn } = useDeleteColumn();
 
   return (
     <div className={styles.container}>
@@ -38,7 +37,6 @@ export default function DeleteWarning({
             type === "board"
               ? () => mutateDeleteBoard(id)
               : () => mutateDeleteTask(id)
-            // : () => mutateDeleteColumn(id)
           }
           disabled={deleteBoardIsPending || deleteTaskIsPending}
         >

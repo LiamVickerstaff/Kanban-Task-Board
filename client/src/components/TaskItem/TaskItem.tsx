@@ -4,7 +4,7 @@ import type { Task } from "../../types/dataTypes";
 import TaskItemInfo from "../TaskItemInfo/TaskItemInfo";
 import styles from "./TaskItem.module.css";
 import DragIcon from "../icons/DragIcon";
-import { useState, type RefObject } from "react";
+import { useEffect, useState, type RefObject } from "react";
 
 export default function TaskItem({
   task,
@@ -24,30 +24,35 @@ export default function TaskItem({
     (sub) => sub.complete,
   ).length;
 
+  useEffect(() => {
+    const handlePointerUp = () => setIsDragging(false);
+    window.addEventListener("pointerup", handlePointerUp);
+    return () => window.removeEventListener("pointerup", handlePointerUp);
+  }, []);
+
   return (
     <Reorder.Item
       value={task.id}
       key={task.id}
       className={styles.container}
       dragConstraints={columnRef}
+      onDragEnd={onDragEnd}
       dragElastic={0.1}
       dragControls={dragControls}
-      onDragStart={() => setIsDragging(true)}
-      onDragEnd={() => {
-        (setIsDragging(false), onDragEnd());
-      }}
       animate={{
         scale: isDragging ? 1.05 : 1,
         rotate: isDragging ? [0, -2, 2, 0] : 0,
       }}
       transition={{
         scale: { type: "spring", stiffness: 300, damping: 25 },
-        rotate: {
-          duration: 0.4,
-          repeat: Infinity,
-          repeatDelay: 1.6,
-          ease: "easeInOut",
-        },
+        rotate: isDragging
+          ? {
+              duration: 0.5,
+              repeat: Infinity,
+              repeatDelay: 1,
+              ease: "easeInOut",
+            }
+          : { duration: 0.2 },
       }}
     >
       <button

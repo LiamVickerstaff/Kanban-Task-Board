@@ -10,6 +10,7 @@ export const useToggleSubtaskCompleted = () => {
   const mutate = useMutation({
     mutationFn: updateSubtask,
     onMutate: async (updatedSubtask) => {
+      
       await queryClient.cancelQueries({ queryKey: ["board", boardId] });
 
       const previousBoard = queryClient.getQueryData(["board", boardId]);
