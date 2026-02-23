@@ -1,0 +1,34 @@
+.container {
+  max-width: 50rem;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-block-end: 0.8rem;
+}
+
+.welcome {
+  font-size: 1.4rem;
+  margin-block-end: 1.2rem;
+}
+
+.warning {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--btn-danger-bg);
+  margin-block-end: 0.4rem;
+}
+
+.body {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  margin-block-end: 0.8rem;
+  letter-spacing: 0.2px;
+}
+
+.dismiss {
+  font-size: 1.2rem;
+}

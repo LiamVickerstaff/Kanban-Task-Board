@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { useUserStore } from "../../../stores/useUserStore";
 import { getAllBoardsOfUserId } from "../../../api/domains/boardsApi";
+import { useUser } from "@clerk/clerk-react";
 
 export const useGetAllBoards = () => {
-  const userId = useUserStore((s) => s.id);
+  const { user } = useUser();
 
   const query = useQuery({
-    queryKey: ["boards", userId],
-    queryFn: () => getAllBoardsOfUserId(userId),
-    enabled: !!userId,
+    queryKey: ["boards", user?.id],
+    queryFn: () => getAllBoardsOfUserId(),
+    enabled: !!user?.id,
     staleTime: 1000 * 60 * 5,
   });
 

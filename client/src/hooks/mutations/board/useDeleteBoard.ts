@@ -3,12 +3,13 @@ import useModalStore from "../../../stores/useModalStore";
 import { deleteBoard } from "../../../api/domains/boardsApi";
 import { useUserStore } from "../../../stores/useUserStore";
 import type { Board } from "../../../types/dataTypes";
+import { useUser } from "@clerk/clerk-react";
 
 export const useDeleteBoard = () => {
   const close = useModalStore((s) => s.close);
   const queryClient = useQueryClient();
-
-  const { setCurrentBoardId, id: userId } = useUserStore();
+  const { user } = useUser();
+  const { setCurrentBoardId } = useUserStore();
 
   const mutation = useMutation({
     mutationFn: deleteBoard,
@@ -19,14 +20,14 @@ export const useDeleteBoard = () => {
 
       // Update user's boards cache
       queryClient.setQueryData(
-        ["boards", userId],
+        ["boards", user?.id],
         (old: Board[] = []) =>
           old?.filter((b) => b.id !== deletedBoard.id) ?? [],
       );
 
       // Get latest updatedBoards from cache
       const updatedBoards =
-        queryClient.getQueryData<any[]>(["boards", userId]) ?? [];
+        queryClient.getQueryData<any[]>(["boards", user?.id]) ?? [];
 
       console.log(
         "current boards inside [`boards`, userId] cache: ",

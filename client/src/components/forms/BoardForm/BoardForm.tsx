@@ -1,18 +1,17 @@
 import { FormProvider, useForm } from "react-hook-form";
-// import styles from "./BoardForm.module.css";
 import TextField from "../fields/TextField/TextField.js";
 import Button from "../../atoms/Buttons/Button/Button.js";
 import ColumnsTagsField from "../fields/ColumnTagsField/ColumnTagsField.js";
-import { useUserStore } from "../../../stores/useUserStore.js";
 import type { BoardFormData } from "../../../types/formTypes.js";
 import { useCreateBoard } from "../../../hooks/mutations/board/useCreateBoard.js";
 import { useUpdateBoard } from "../../../hooks/mutations/board/useUpdateBoard.js";
 import { useGetCurrentBoard } from "../../../hooks/queries/board/useGetCurrentBoard.js";
 import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-react";
 
 export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
   // useModalStore state
-  const { id: userId } = useUserStore();
+  const { user } = useUser();
 
   const { data: board } = useGetCurrentBoard();
 
@@ -40,7 +39,11 @@ export default function BoardForm({ type }: { type: "Add New" | "Edit" }) {
       order: index,
     }));
     if (type === "Add New") {
-      createBoardMutation({ ...data, columns: normalizedColumns, userId });
+      createBoardMutation({
+        ...data,
+        columns: normalizedColumns,
+        userId: user?.id,
+      });
     } else {
       updateBoardMutation({ ...data, columns: normalizedColumns });
     }

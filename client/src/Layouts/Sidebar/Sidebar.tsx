@@ -10,12 +10,14 @@ import type { Board } from "../../types/dataTypes";
 import { useUserStore } from "../../stores/useUserStore";
 import { useGetAllBoards } from "../../hooks/queries/board/useGetAllBoards";
 import { useEffect } from "react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 
 export default function Sidebar() {
   const { isOpen, toggleSidebar, closeSideBar } = useSidebarStore();
   const { currentBoardId, setCurrentBoardId } = useUserStore();
   const isMobile = useMediaQuery("(max-width: 767px)");
   const open = useModalStore((s) => s.open);
+  const { user } = useUser();
 
   const {
     data: boardsData,
@@ -27,7 +29,9 @@ export default function Sidebar() {
     if (!boardsData) return;
     if (currentBoardId) return;
 
-    setCurrentBoardId(boardsData[0].id);
+    console.log("boardsData inside sidebar after fetch:", boardsData);
+
+    setCurrentBoardId(boardsData[0]?.id ?? "");
   }, [boardsData]);
 
   const handleAddNewBoard = () => {
@@ -90,7 +94,8 @@ export default function Sidebar() {
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
         <h3 className="headingS">ALL BOARDS ({boardsData?.length ?? "..."})</h3>
         <ul className={styles.boardsList}>
-          {boardsData && boardsData.length > 0 ? (
+          {boardsData &&
+            boardsData.length > 0 &&
             boardsData.map((board) => (
               <li key={board.id} className={`${styles.boardItem}`}>
                 <button
@@ -105,10 +110,7 @@ export default function Sidebar() {
                   <p>{board.title}</p>
                 </button>
               </li>
-            ))
-          ) : (
-            <p>No boards</p>
-          )}
+            ))}
           <li className={styles.newBoardItem}>
             <button
               className={`${styles.btn} headingM`}
@@ -119,6 +121,22 @@ export default function Sidebar() {
           </li>
         </ul>
         <div className={styles.bottomGroup}>
+          <div className={`${styles.userGroup} ${styles.btn} headingM`}>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: {
+                    width: "30px",
+                    height: "30px",
+                    minWidth: "30px",
+                    minHeight: "30px",
+                    flexShrink: 0,
+                  },
+                },
+              }}
+            />
+            <p>{user?.fullName}</p>
+          </div>
           <LightDarkSwitch />
           {!isMobile && <HideSidebarButton />}
         </div>

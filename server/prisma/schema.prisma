@@ -7,20 +7,11 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id  String @id @default(uuid())
-  email String @unique
-  username String?
-  createdAt DateTime @default(now())
-  boards Board[]
-}
-
 model Board {
   id String @id @default(uuid())
   title String
   createdAt DateTime @default(now())
   userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   columns Column[]
 }
 

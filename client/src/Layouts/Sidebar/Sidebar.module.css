@@ -86,6 +86,16 @@
   color: var(--main-purple-hover);
 }
 
+.userGroup {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.userGroup p {
+  font-weight: 500;
+  color: var(--strong-text-clr);
+}
+
 @media (min-width: 768px) {
   .pageOverlay {
     position: relative;

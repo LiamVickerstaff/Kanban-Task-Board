@@ -1,26 +1,38 @@
+import type { SuccessResponse } from "../../types/api";
 import type { Board } from "../../types/dataTypes";
 import type { BoardApiBody } from "../../types/formTypes";
 import api from "../apiMethods";
 
-export const getBoardOfId = (boardId: string): Promise<Board> => {
-  return api.get<Board>(`/board/${boardId}`);
+export const getBoardOfId = async (boardId: string): Promise<Board> => {
+  const res = await api.get<SuccessResponse<Board>>(`/board/${boardId}`);
+  return res.data;
 };
 
-export const getAllBoardsOfUserId = (userId: string): Promise<Board[]> => {
-  return api.get<Board[]>(`/board/all/${userId}`);
+export const getAllBoardsOfUserId = async (): Promise<Board[] | []> => {
+  const res = await api.get<SuccessResponse<Board[] | []>>(`/board/all`);
+  return res.data;
 };
 
-export const createBoard = (newBoard: BoardApiBody): Promise<Board> => {
-  return api.post<Board, BoardApiBody>("/board/new", newBoard);
+export const createBoard = async (newBoard: BoardApiBody): Promise<Board> => {
+  const res = await api.post<SuccessResponse<Board>, BoardApiBody>(
+    "/board/new",
+    newBoard,
+  );
+  return res.data;
 };
 
-export const updateBoard = (updatedBoard: BoardApiBody): Promise<Board> => {
-  return api.put<Board, BoardApiBody>(
+export const updateBoard = async (
+  updatedBoard: BoardApiBody,
+): Promise<Board> => {
+  const res = await api.put<SuccessResponse<Board>, BoardApiBody>(
     `/board/${updatedBoard.id}`,
     updatedBoard,
   );
+
+  return res.data;
 };
 
-export const deleteBoard = (boardId: string): Promise<Board> => {
-  return api.del<Board>(`/board/${boardId}`);
+export const deleteBoard = async (boardId: string): Promise<Board> => {
+  const res = await api.del<SuccessResponse<Board>>(`/board/${boardId}`);
+  return res.data;
 };

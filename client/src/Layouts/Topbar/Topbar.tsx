@@ -7,6 +7,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import PlusIcon from "../../components/icons/PlusIcon";
 import TaskForm from "../../components/forms/TaskForm/TaskForm";
 import { useGetCurrentBoard } from "../../hooks/queries/board/useGetCurrentBoard";
+import { useEffect } from "react";
 
 export default function Topbar() {
   const open = useModalStore((s) => s.open);
@@ -14,6 +15,27 @@ export default function Topbar() {
   const isMobile = useMediaQuery("(max-width: 767px)");
 
   const { data: boardData, isPending } = useGetCurrentBoard();
+
+  useEffect(() => {
+    console.log("boardData inside TopBar component:", boardData);
+  }, [boardData]);
+
+  if (isPending) {
+    return (
+      <div className={styles.container}>
+        <button
+          className={`${styles.btn} ${styles.selectBoardBtn}`}
+          onClick={() => toggleSidebar()}
+          disabled={!isMobile}
+        >
+          <h2 className={`headingXL ${styles.currentBoardTitle}`}>
+            Loading Board...
+          </h2>
+          {isMobile && <DownTick className={styles.downTick} />}
+        </button>
+      </div>
+    );
+  }
 
   if (!boardData)
     return (
@@ -24,7 +46,7 @@ export default function Topbar() {
           disabled={!isMobile}
         >
           <h2 className={`headingXL ${styles.currentBoardTitle}`}>
-            Failed to load board
+            No Board Selected
           </h2>
           {isMobile && <DownTick className={styles.downTick} />}
         </button>

@@ -1,10 +1,17 @@
 import { Router } from "express";
 import prisma from "../prisma";
+import { getAuth } from "@clerk/express";
 
 const router = Router();
 
-router.get("/all/:userId", async (req, res) => {
-  const userId = req.params.userId;
+router.get("/all", async (req, res) => {
+  const { userId } = getAuth(req);
+
+  if (!userId)
+    return res.status(401).json({
+      message: "Server error: user not authorized",
+      error: "User not authorized",
+    });
 
   try {
     const allBoards = await prisma.board.findMany({
@@ -57,7 +64,14 @@ router.get("/:boardId", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, columns, userId } = req.body;
+  const { title, columns } = req.body;
+  const { userId } = getAuth(req);
+
+  if (!userId)
+    return res.status(401).json({
+      message: "Server error: user not authorized",
+      error: "User not authorized",
+    });
 
   try {
     const createdBoard = await prisma.board.create({
@@ -69,11 +83,7 @@ router.post("/new", async (req, res) => {
             order: column.order,
           })),
         },
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
+        userId: userId,
       },
       include: {
         columns: true,
